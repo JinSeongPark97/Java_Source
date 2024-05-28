@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+window.onload = () => {
+	document.querySelector("#btnShow").addEventListener("click",func); 
+};
+
+function func(){
+	// alert("a");
+	let now = new Date();
+	let year = now.getFullYear();
+	let month = now.getMonth();
+	let day = now.getDate();
+	console.log(`${year} ${month + 1} ${day}`)
+
+	// 현재 월의 1일은 무슨 요일인가?
+	let setDate = new Date(year, month, 1)
+	let firstDay = setDate.getDate();
+	console.log(firstDay); // 1
+	let dow = setDate.getDay(); // 요일반환 0(일요일) ~ 6(토요일) 
+	console.log(dow);
+	
+	// 현재 월의 날수는 몇일 인가 ?
+	const nod = new Array(31,28,31,30,31,30,31,31,30,31,30,31); // 배열, Array안의 멤버는 값 변경이 가능하다
+	// 2월 날 수는 운년 체크
+	if(year % 4 === 0 && year % 100 !== 0 || year % 400 === 0){
+		nod[1] = 29;
+	}
+	
+	let str = makeCalendar(dow, nod[month], year, month + 1, day);
+	document.querySelector("#disp").innerHTML = str;
+	document.querySelector("#etc").style.display = ""; // 버튼 등장
+	
+	// makeCalendar(dow, nod[month], year, month + 1, day);
+	
+}
+
+function makeCalendar(dow, nod, year, month, day){
+	let str = "<table border = '1'>";
+	str += `<tr><th colspan ='7'>${year}년 ${month}월 </th></tr>`;
+	str += `<tr>`;
+	let week = new Array("일","월","화","수","목","금","토");
+	for(let i = 0; i < week.length; i++){
+		str += `<th>${week[i]}</th>`;
+	}
+	str += `</tr>`; // 년 월 요일명 출력 완료
+	
+	// 날 수 채우기
+	let no = 1;
+	let currentCell = 0;
+	// 이번 달은 몇 주인가 ?
+	let ju = Math.ceil((nod + dow) / 7); // 입력받은 숫자보다 크거나 같은 정수 중 가장 작은 정수를 리턴
+	console.log(`이번 달은 ${ju} 주`);
+	for(let r = 0; r < ju; r++){	// 행
+		str += `<tr style = 'text-align:center'>`;
+		for(let col = 0; col < 7; col++){	// 열
+			if(currentCell < dow || no > nod){ // ex) 첫 주에 1일이 수요일이면 이전은 공백처리, 날 수까지만 출력
+			str += `<td>&nbsp;</td>`;
+			currentCell++;				
+			}else{
+				if(no === day) {	// 오늘은 글자색 파랑으로 표시
+					str += `<td style ='color:blue'>${no}</td>`
+				}else {
+					str += `<td>${no}</td>`;
+				}
+				no++;
+			}
+		}
+		
+		str += `</tr>`;
+	}
+	
+	str += "</table>";
+	return str;
+}
+</script>
+</head>
+<body>
+<button id = "btnShow">달력보기</button>
+<br><br>
+<div id = "disp"></div>
+<br>
+<div id = "etc" style = "display: none;">
+	<button id = "btnPyear">이전 년</button>
+	<button id = "btnPmonth">이전 월</button>
+	<button id = "btnNmonth">다음 월</button>
+	<button id = "btnNyear">다음 년</button>
+</div>
+</body>
+</html>

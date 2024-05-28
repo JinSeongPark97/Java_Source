@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+class MyClock{
+	constructor({template}){
+		this.template = template;
+	}
+	
+	render(){	// 시 분 초 읽어서 출력
+		let date = new Date();
+		
+		let hours = date.getHours();
+		if(hours < 10) hours = '0' + hours	// 00 ~ 09 11 ~ 60 두개 다 두자릿수로 표현
+		
+		let mins = date.getMinutes();
+		if(mins < 10) mins = '0' + mins	// 두개 다 두자릿수로 표현
+		
+		let secs = date.getSeconds();
+		if(secs < 10) secs = '0' + secs	// 두개 다 두자릿수로 표현
+		
+		let output = this.template
+		.replace('h', hours)
+		.replace('m', mins)
+		.replace('s', secs)
+		console.log(output);
+	}
+	
+	stop(){
+		clearInterval(this.timer); // setInterval()을 해제하는 함수 => clearInterval
+	}
+	
+	start(){
+		this.render();	// 처음 호출을 위해 사용
+		// 특정 함수를 1초마다 주기적으로 호출하기.
+		this.timer = setInterval(() => this.render(), 1000); 
+	}
+}
+
+
+let clock; // 멤버 변수
+
+function func1(){
+	clock = new MyClock({template:'h시 m분 s초'});
+	clock.start();	// 시간이 표시되기 시작.	
+}
+
+function func2(){
+	clock.stop();	// stop()을 만나면 끝
+}
+
+</script>
+</head>
+<body>
+	<h2>Class를 이용한 디지털 시계</h2>
+	<button onclick="func1()">시간 콘솔로 출력</button>
+	<button onclick="func2()">시간 출력 종료</button>
+</body>
+</html>
