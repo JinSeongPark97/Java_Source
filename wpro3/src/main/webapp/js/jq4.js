@@ -42,7 +42,7 @@ $(document).ready(function(){
 			// alert(datas);
 			// 하위 element(요소)를 검색할 때 find()
 			// alert($(datas).find('sangpum').length);
-			$("#disp").find('sangpum').each(function(){
+			$(datas).find('sangpum').each(function(){
 				let sangpum = $(this);
 				let str = "<div>";
 				str += sangpum.find('code').text() + " ";
@@ -59,7 +59,7 @@ $(document).ready(function(){
 	});
 	
 	// json 읽기2
-	$('#test4').click(function(){
+	$('#test4').on("click", function(){
 		// alert('4');
 		$("#disp").empty();
 		
@@ -69,18 +69,64 @@ $(document).ready(function(){
 			// data:{'code':3, 'sang':'book'},	// jq4json.jsp?code=3&sang=book 과 동일
 			dataType:"json",	// 반환 data type
 			success:function(datas){
+				// alert(datas);<tr><th>코드</th>
 				
-			},error:function(){
+				let str = "";
+				let count = 0;
+				str += "<table border='1'>";
+				str +=  "<tr><th>코드</th><th>품명</th><th>수량</th><th>단가</th></tr>";
+				
+				$.each(datas.sangpum, function(index, data){	// jquery $
+					str += "<tr>";
+					str += "<td>" + data["code"] + "</td>";
+					str += "<td>" + data["sang"] + "</td>";
+					str += "<td>" + data["su"] + "</td>";
+					str += "<td>" + data.dan + "</td>";
+					str += "</tr>";
+					count++;
+				});
+				str += "</table>";
+				$("#disp").append(str);
+				$("#disp").append(`건수 : ${count}개`);  
+			},
+			error:function(){
 				$("#disp").text('test4 처리 오류');	
 			}
 			
 		});
 	});
 	
-	// json 읽기2
+	// xml 읽기2
 	$('#test5').on("click", function(){
 		// alert('5');
 		$("#disp").empty();
-	});
-	
+		
+		$.ajax({
+			type:"post",	// 요청 방식 post
+			url:'jq4xml.jsp',
+			dataType:"xml",	// 반환 data type
+			success:function(datas){	
+				let count = 0;
+				let str = "<table border='1'>";
+				str +=  "<tr><th>코드</th><th>품명</th><th>수량</th><th>단가</th></tr>";
+				
+				$(datas).find('sangpum').each(function(){
+					str += "<tr>";	//  타겟의 요소 이름 체크 
+					str += "<td>" + $(this).find("code").text() + "</td>";
+					str += "<td>" + $(this).find("sangname").text() + "</td>";
+					str += "<td>" + $(this).find("su").text() + "</td>";
+					str += "<td>" + $(this).find("danga").text() + "</td>";
+					str += "</tr>";
+					count++;
+				});
+				str += "</table>";
+				$("#disp").append(str);
+				$("#disp").append(`건수(xml) : ${count}개`);  
+			},
+			error:function(){
+				$("#disp").text('test5 처리 오류');	
+			}
+			
+		});
+	});		
 });
