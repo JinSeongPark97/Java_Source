@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?> 
+<?xml version="1.0" encoding="UTF-8"?>
+ 
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
@@ -16,7 +17,7 @@ PreparedStatement pstmt = null;
 ResultSet rs = null;
 
 try{
-	Class.forName("org.mariadb.jdbc.Driver"); //
+	Class.forName("org.mariadb.jdbc.Driver"); 
 	
 	String url = "jdbc:mariadb://localhost:3306/test";
 	conn = DriverManager.getConnection(url, "root", "123");
@@ -31,7 +32,7 @@ try{
 	rs = pstmt.executeQuery();
 	
 
-	while(rs.next()){	// 이 다음 행에서 자바를 빠져나온다.
+	while(rs.next()){	
 %>		
 		<jikwon>
 			<sabun><% out.print(rs.getString("jikwon_no"));  %></sabun>    
