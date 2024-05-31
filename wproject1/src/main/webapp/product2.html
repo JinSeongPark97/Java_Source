@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+window.onload = () => {
+	document.querySelector("#btnOk").onclick = function(){
+		frm.submit(); // name과 price를 들고 날아감
+	}
+}
+</script>
+</head>
+<body>
+<table>
+	<tr>
+		<td>>
+			<img src = "images/sangpum2.jpg" title="케빈 더브라위너" width="80%">
+		</td>
+		<td>
+	<pre>
+맨시티 공식 굿즈 스누지 케빈 더 브라위너 김덕배 미니미 인형 쿠션 45 x 30 cm
+114,400원
+무료배송  반품비 40,000원 더 알아보기 
+6/19 도착 예정
+판매자: 융융스토어4
+배송사: 우체국
+	</pre>	
+	</tr>
+	<tr>
+		<td colspan="2">
+			<form action="Cart" name="frm" method="post"> <!-- Cart : 장바구니 -->
+				<input type="hidden" name="name" value="케빈 더브라위너 인형 맨시티 굿즈">
+				<input type="hidden" name="price" value="114400"> <!-- 콤마를 찍으면 안됨. -->
+				<input type="button" id="btnOk" value="장바구니에 상품 담기">
+				<input type="button" value="홈으로 이동" onclick="history.back()">		<!-- history.back() : 이전 페이지로 돌아가기 -->
+			</form>
+			
+		</td>
+	</tr>
+</table>
+</body>
+</html>

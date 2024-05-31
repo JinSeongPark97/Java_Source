@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+window.onload = () => {
+	document.querySelector("#btnOk").onclick = function(){
+		frm.submit(); // name과 price를 들고 날아감
+	}
+}
+</script>
+</head>
+<body>
+<table>
+	<tr>
+		<td>
+			<img src = "images/sangpum1.jpg" title="홀란드" width="80%">
+		</td>
+		<td>
+	<pre>
+엘링 홀란드 인형 맨시티 굿즈
+20% 50,000원 
+40,000원
+배송비 3,000원
+6/20 도착 예정
+판매자:인터라켄
+배송사: CJ 대한통운
+	</pre>	
+	</tr>
+	<tr>
+		<td colspan="2">
+			<form action="Cart" name="frm" method="post">
+				<input type="hidden" name="name" value="엘링 홀란드 인형 맨시티 굿즈">
+				<input type="hidden" name="price" value="40000"> <!-- 콤마를 찍으면 안됨. -->
+				<input type="button" id="btnOk" value="장바구니에 상품 담기">
+				<input type="button" value="홈으로 이동" onclick="history.back()">		<!-- history.back() : 이전 페이지로 돌아가기 -->
+			</form>
+		</td>
+	</tr>
+</table>
+</body>
+</html>

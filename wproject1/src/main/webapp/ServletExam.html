@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+window.onload = () => {
+	document.querySelector("#btnRg").onclick=function(){
+		frm.submit();
+		
+	}
+}
+</script>
+</head>
+<body>
+<h2>* Session 연습 문제 : Servlet 사용 *</h2>
+성적 입력<br>
+<form action="NewStart" name="frm" method="post">
+번호 : <input type="text" name="no" value=""><br>
+이름 : <input type="text" name="name" value=""><br>
+국어 : <input type="text" name="kor" value=""><br>
+영어 : <input type="text" name="eng" value=""><br>
+<input type="button" id="btnRg" value="등록"><br>
+</form>
+</body>
+</html>
