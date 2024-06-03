@@ -25,13 +25,21 @@ public class NewStart extends HttpServlet {
 			int eng = Integer.parseInt(request.getParameter("eng"));
 			
 			HttpSession session = request.getSession(true);
-			ArrayList<Student> glist = (ArrayList<Student>) session.getAttribute("list");
+			ArrayList<Student> slist = (ArrayList<Student>) session.getAttribute("list"); // 세션이름을 리스트로 지명
 			
-			// glist가 null일 경우 새로운 ArrayList로 초기화
-			 if(glist == null) glist = new ArrayList<Student>();
-			glist.add(new Student(no, name, kor, eng)); 
 			
-			session.setAttribute("list", glist);
+			 if(slist == null) slist = new ArrayList<Student>();
+			 
+			 // 번호 중복 체크
+		      for(Student students : slist) {
+		         if (students.getNo() == no) {
+		                response.sendRedirect("ServletExam.html"); // 점수 입력창으로 돌아가기      
+		                //return; 
+		           }
+		      }
+			 
+			slist.add(new Student(no, name, kor, eng));
+			session.setAttribute("list", slist);
 	
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out = response.getWriter();
@@ -43,8 +51,8 @@ public class NewStart extends HttpServlet {
 			
 			int Su = 0;
 			int totalSum = 0;
-			for(int i = 0; i < glist.size(); i++) {
-				Student student = (Student)glist.get(i);
+			for(int i = 0; i < slist.size(); i++) {
+				Student student = (Student)slist.get(i);
 				int total = student.getTotal();
 				out.println("<tr><td>" + student.getNo() + "</td>");
 				out.println("<td>" + student.getName() + "</td>");

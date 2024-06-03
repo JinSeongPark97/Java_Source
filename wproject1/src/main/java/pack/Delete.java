@@ -20,8 +20,8 @@ public class Delete extends HttpServlet {
 		HttpSession session = request.getSession(false); // 세션이 있으면 읽고 없으면 생성x
 		if(session == null) return;
 		
-		ArrayList<Student> glist = (ArrayList<Student>)session.getAttribute("list");
-		if(glist == null) return;
+		ArrayList<Student> slist = (ArrayList<Student>)session.getAttribute("list");
+		if(slist == null) return;
 		
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();

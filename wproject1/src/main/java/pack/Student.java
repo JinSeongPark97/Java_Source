@@ -1,6 +1,6 @@
 package pack;
 
-public class Student {
+public class Student { // VTO 클래스
 	private int no;
 	private String name;
 	private int kor;
