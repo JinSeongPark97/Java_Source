@@ -7,5 +7,4 @@
 LocalTime time = LocalTime.now();
 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH시 mm분 ss초");
 out.println(time.format(formatter));
-
 %>
