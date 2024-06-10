@@ -1,6 +1,7 @@
 package pack;
 
-public class SangpumDto { // DtoClass
+public class SangpumBean { // FormBean의 역할을 수행함.
+	
 	private String code, sang, su, dan;
 
 	public String getCode() {
