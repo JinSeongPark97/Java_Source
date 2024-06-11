@@ -97,4 +97,90 @@ public class ConnPooling {
 		}
 		return b;
 	}
+	
+	public SangpumDto updateData(String code) {
+		SangpumDto dto = null;
+		/*
+		try {	
+			String sql = "select * from sangdata where code=?";
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, code);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) { // 자료가 있는 경우 조건문 실행
+				dto = new SangpumDto();
+				dto.setCode(rs.getString("code"));
+				dto.setSang(rs.getString("sang"));
+				dto.setSu(rs.getString("su"));
+				dto.setDan(rs.getString("dan"));
+			}
+			
+		} catch (Exception e) {
+			System.out.println("updateData err : " + e);
+		}finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+				
+			} catch (Exception e2) {
+				
+			}
+		}
+		return dto;
+		*/
+		
+		String sql = "select * from sangdata where code=?";
+		// try ~ with ~ resource 문 -> finally 문 사용 X
+		try(Connection conn = ds.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql)){	
+			pstmt.setString(1, code);
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next()) { // 자료가 있는 경우 조건문 실행 
+				dto = new SangpumDto();
+				dto.setCode(rs.getString("code"));
+				dto.setSang(rs.getString("sang"));
+				dto.setSu(rs.getString("su"));
+				dto.setDan(rs.getString("dan"));
+			}
+		} catch (Exception e) {
+			System.out.println("updateData err : " + e);
+		}
+		
+		return dto;	
+	}
+	
+	public boolean updateDataOk(SangpumBean bean) {
+		boolean b = false;
+		String sql = "update sangdata set sang=?,su=?,dan=? where code=?";
+		
+		try(Connection conn = ds.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql)){	
+			pstmt.setString(1, bean.getSang());
+			pstmt.setString(2, bean.getSu());
+			pstmt.setString(3, bean.getDan());
+			pstmt.setString(4, bean.getCode());
+						
+			if(pstmt.executeUpdate() > 0) b = true; // update가 되었을 경우, b = true , 수정한 레코드의 개수만큼 반환됨.			
+		} catch (Exception e) {
+			System.out.println("updateData err : " + e);
+		}
+		return b;
+	}
+	public boolean deleteData(String code) {
+		boolean b = false;
+		String sql = "delete from sangdata where code=?";
+		
+		try(Connection conn = ds.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql)){	
+			pstmt.setString(1, code);
+						
+			if(pstmt.executeUpdate() > 0) b = true; // update가 되었을 경우, b = true , 수정한 레코드의 개수만큼 반환됨.			
+		} catch (Exception e) {
+			System.out.println("updateData err : " + e);
+		}
+		return b;
+	}
 }
