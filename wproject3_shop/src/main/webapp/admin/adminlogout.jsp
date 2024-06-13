@@ -8,10 +8,12 @@
 </head>
 <body>
 <%
-session.removeAttribute("adminOk"); // 세션 삭제
+session.removeAttribute("adminKey");
+//session.invalidate();
 %>
-로그아웃 성공
-<br><br>
-<a href="javascript:window.close()">[창닫기]</a>
+<script type="text/javascript">
+	alert("관리자 로그아웃 성공");
+	location.href="../index.jsp";
+</script>
 </body>
 </html>

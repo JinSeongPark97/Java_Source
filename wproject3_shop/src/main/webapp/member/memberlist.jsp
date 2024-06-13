@@ -4,14 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원보기</title>
 </head>
 <body>
-<%
-session.removeAttribute("adminOk"); // 세션 삭제
-%>
-로그아웃 성공
-<br><br>
-<a href="javascript:window.close()">[창닫기]</a>
+<a href="register.jsp">회원등록</a> <!-- 회원등록 jsp파일 연결 -->
 </body>
 </html>

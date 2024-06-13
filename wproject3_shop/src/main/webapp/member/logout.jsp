@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%
+    session.removeAttribute("idKey");
+    //session.invalidate();
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,11 +12,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%
-session.removeAttribute("adminOk"); // 세션 삭제
-%>
-로그아웃 성공
-<br><br>
-<a href="javascript:window.close()">[창닫기]</a>
+<script type="text/javascript">
+alert("로그아웃 성공");
+location.href="../guest/guest_index.jsp";
+</script>
 </body>
 </html>
