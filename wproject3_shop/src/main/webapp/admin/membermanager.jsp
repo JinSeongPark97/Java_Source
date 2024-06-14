@@ -16,7 +16,7 @@
 <body>
 <h2>** 관리자 - 전체 회원관리 **</h2>
 <div style="text-align: center;">
-<%@ include file="admin_top.jsp" %>
+<%@ include file="admin_top.jsp" %> 
 </div>
 
 <table style="width: 90%">
@@ -24,7 +24,7 @@
   	<th>아이디</th><th>회원명</th><th>이메일</th><th>전화</th><th>수정</th>
   </tr>
   <%
-  ArrayList<MemberBean> list = memberMgr.getMemberAll(); 
+  ArrayList<MemberBean> list = memberMgr.getMemberAll();
   for(MemberBean m:list){
   %>
   <tr style="text-align: center;">
@@ -40,9 +40,9 @@
 </table>
 
 <%@ include file="admin_bottom.jsp" %>
-
+<!-- 아래 3행은 보이지 않음 -->
 <form action="memberupdate_admin.jsp" name="updateFrm" method="post">
-<input type="hidden" name="id">
+<input type="hidden" name="id"> <!-- name의 값을 들고 memUpdate() 메소드로 이동할 예정 -->
 </form>
 </body>
 </html>

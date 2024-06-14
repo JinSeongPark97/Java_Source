@@ -9,15 +9,15 @@
 
 <%
 String id = (String)session.getAttribute("idKey");
-boolean b = memberMgr.memberUpdate(memberBean, id);  
-
-if(b){
+boolean b = memberMgr.memberUpdate(memberBean, id);
+out.println(b);
+if(b){ // b = true : 업데이트 성공
 %>
 	<script>
 	alert("수정 성공");
 	location.href="../guest/guest_index.jsp";
 	</script>
-<%}else{%>
+<%}else{%> <!-- b: true : 업데이트 실패 -->
 	<script>
 	alert("수정 실패\n관리자에게 문의 바람");
 	history.back();
