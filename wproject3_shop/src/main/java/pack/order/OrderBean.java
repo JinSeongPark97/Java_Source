@@ -1,4 +1,4 @@
-package pack.product;
+package pack.order;
 
 import lombok.Data;
 

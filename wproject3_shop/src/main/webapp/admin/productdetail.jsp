@@ -50,12 +50,20 @@ ProductDto dto = productMgr.getProduct(no);
 		</tr>
 		<tr>
 			<td colspan="3" style="text-align: center;">
-				<a href="javascript:productUpdate()">[수정하기]</a>&nbsp;&nbsp;
-				<a href="javascript:productDelete()">[삭제하기]</a>&nbsp;&nbsp;				
+				<a href="javascript:productUpdate('<%=dto.getNo()%>')">[수정하기]</a>&nbsp;&nbsp;
+				<a href="javascript:productDelete('<%=dto.getNo()%>')">[삭제하기]</a>&nbsp;&nbsp;				
 			</td>
 		</tr>	
 	</table>
-	<%@ include file="admin_bottom.jsp"%> 	
+	<%@ include file="admin_bottom.jsp"%> 
+	
+	<form action="productupdate.jsp" name="updateForm" method="post">
+		<input type = "hidden" name="no">
+	</form>	
+	
+	<form action="productprocx.jsp?flag=delete" name="delForm" method="post"> <!-- 삭제하기, method를 post로 변경 -->
+		<input type = "hidden" name="no">
+	</form>	
 <%
 %>
 </body>

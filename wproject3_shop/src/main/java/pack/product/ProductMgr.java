@@ -20,6 +20,7 @@ public class ProductMgr {
 	   private ResultSet rs;
 	   private DataSource ds;
 	   
+	   // 생성자
 	   public ProductMgr() {
 		   try {
 		         Context context = new InitialContext();
@@ -106,6 +107,7 @@ public class ProductMgr {
 	   
 	   // 자료 보기
 	   public ProductDto getProduct(String no) {
+
 		   ProductDto dto = null;
 		   try {
 			   conn = ds.getConnection();
@@ -137,6 +139,76 @@ public class ProductMgr {
 		}
 		   
 		   return dto;
+	   }
+
+	   // 상품 수정
+	   public boolean updateProduct(HttpServletRequest request) {
+		   boolean b = false;
+			try {
+				 // 업로드 할 이미지 경로 : upload 폴더(절대 경로)
+				   String uploadDir = "C:/work/jsou/wproject3_shop/src/main/webapp/upload";
+				   MultipartRequest multi = new MultipartRequest(request, uploadDir,
+						   5 * 1024 * 1024, "UTF-8", new DefaultFileRenamePolicy()); // 3번째 인수는 파일의 크기(5MB)
+				   conn = ds.getConnection();
+				   
+				   if(multi.getFilesystemName("image") == null) {
+				   String sql = "update shop_product set name=?,price=?,detail=?,stock=? where no=?"; 
+				   pstmt = conn.prepareStatement(sql);
+				   pstmt.setString(1,  multi.getParameter("name"));
+				   pstmt.setString(2,  multi.getParameter("price"));
+				   pstmt.setString(3,  multi.getParameter("detail"));
+				   pstmt.setString(4,  multi.getParameter("stock"));
+				   pstmt.setString(5,  multi.getParameter("no"));
+				   }else {
+					   String sql = "update shop_product set name=?,price=?,detail=?,stock=?,image=? where no=?"; 
+					   pstmt = conn.prepareStatement(sql);
+					   pstmt.setString(1,  multi.getParameter("name"));
+					   pstmt.setString(2,  multi.getParameter("price"));
+					   pstmt.setString(3,  multi.getParameter("detail"));
+					   pstmt.setString(4,  multi.getParameter("stock"));
+					   pstmt.setString(5,  multi.getFilesystemName("image")); // 자동 업데이트 돼면서 업로드 폴더에 이미지가 들어오게됨.
+					   pstmt.setString(6,  multi.getParameter("no"));
+				   }
+				   if(pstmt.executeUpdate() > 0) {
+					   b = true;   
+				   }
+			} catch (Exception e) {
+				System.out.println("updateProduct err : " + e);
+			}finally {
+		         try {
+		             if(rs != null) rs.close();
+		             if(pstmt != null) pstmt.close();
+		             if(conn != null) conn.close();
+		          } catch (Exception e2) { 
+		        	  
+		          }
+			}	   
+		   return b;
+		  
+	   }
+
+	   // 상품 삭제
+	   public boolean deleteProduct(String no) {
+		   boolean b = false;
+		   try {
+			   conn = ds.getConnection();
+			   String sql = "delete from shop_product where no=?";
+			   pstmt = conn.prepareStatement(sql);
+			   pstmt.setString(1, no);
+			   if(pstmt.executeUpdate() > 0) b = true;
+		} catch (Exception e) {
+			System.out.println("deleteProduct err : " + e);
+		}finally {
+	         try {
+	             if(rs != null) rs.close();
+	             if(pstmt != null) pstmt.close();
+	             if(conn != null) conn.close();
+	          } catch (Exception e2) { 
+	        	  
+	          }
+		}
+		   
+		   return b;
 	   }
 }
 

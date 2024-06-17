@@ -46,7 +46,6 @@
 	</tr>
 	
 </table>
-
 </form>	
 <%@ include file="admin_bottom.jsp"%> 
 </body>
