@@ -29,7 +29,7 @@ public class MemberMgr {
 	   public ArrayList<ZipcodeDto> zipcodeRead(String dongName){
 		   ArrayList<ZipcodeDto> list = new ArrayList<ZipcodeDto>();
 		   try {	// DB 연결
-			   conn = ds.getConnection();
+			    
 			   String sql = "select * from ziptab where area3 like ?";
 			   pstmt = conn.prepareStatement(sql);
 			   pstmt.setString(1, dongName + "%");

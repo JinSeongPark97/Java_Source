@@ -43,10 +43,6 @@ function funcNewMember() {
    location.href="register.jsp";
 }
 
-
-
-
-
 // ----------- 쇼핑몰 관련 ---------------
 //쇼핑몰 로그인 후 자신의 정보 수정 시 사용
 function memberUpdateOk(){ 
