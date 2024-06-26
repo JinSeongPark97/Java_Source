@@ -4,9 +4,10 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
- <properties resource="pack/db.properties" />
+ <properties resource="pack/mybatis/db.properties" />
  <typeAliases>
- <typeAlias type="pack.DataDto" alias="dto"/>
+ <typeAlias type="pack.business.DataDto" alias="dto"/>
+ <typeAlias type="pack.business.DataFormBean" alias="fbean"/> 
  </typeAliases>
  
  <environments default="dev">
@@ -21,6 +22,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   </environment>
  </environments>
  <mappers>
-  <mapper resource="pack/DataMapper.xml" />
+  <mapper resource="pack/mybatis/DataMapper.xml" />
  </mappers>
 </configuration>

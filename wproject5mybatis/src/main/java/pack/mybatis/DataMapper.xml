@@ -14,12 +14,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   select code,sang,su,dan from sangdata where code = #{code}
  </select>
  
- <insert id="insertData" parameterType="dto">
+ <insert id="insertData" parameterType="fbean">
   insert into sangdata(code,sang,su,dan) values(#{code},#{sang},#{su},#{dan})
  </insert>
  
- <update id="updateData" parameterType="dto">
-  update sangdata set sang=#{sang},su=#{su},dan=#{dan} where code=#{code}
+ <update id="updateData" parameterType="fbean">
+  update sangdata set sang=#{sang},su=#{su},dan=#{dan}  where code=#{code}
  </update>
  
  <delete id="deleteData" parameterType="int">
