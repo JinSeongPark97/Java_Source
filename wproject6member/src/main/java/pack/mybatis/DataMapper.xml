@@ -16,12 +16,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  <select id="selectPart" parameterType="string" resultType="dto">
   select 
   <include refid="my1" />
-  <include refid="my2" />
+  <include refid="my2"></include>
  </select>
  
  <insert id="insertData" parameterType="fbean">
   insert into memberteb 
-  values(#{id},#{name},#{passwd},now());
+  values(#{id},#{name},#{passwd},now())
  </insert>
  
  <update id="updateData" parameterType="fbean">
@@ -29,7 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   where id=#{id}
  </update>
  
- <delete id="deleteData" parameterType="int">
+ <delete id="deleteData" parameterType="string">
   delete <include refid="my2" />
  </delete>
 </mapper>
