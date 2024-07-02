@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+window.onload = function(){
+	let btnLogin = document.querySelector("#btnLogin");
+	btnLogin.addEventListener("click", loginFunc, false);
+	
+	document.querySelector("#btnInsert").addEventListener("click",insertFunc,false);
+}
+
+function loginFunc(){
+	//alert("A");
+	
+	// 아이디 입력자료 검사
+	if(frm.userid === "") {
+		alert("아이디를 입력하세요");
+		frm.userid.focus();
+		return false;
+	}
+	// 비밀번호 입력자료 검사
+	if(frm.password === "") {
+		alert("비밀번호를 입력하세요");
+		frm.password.focus();
+		return false;
+	}
+	
+	frm.action="login.m2"; // UserServlet의 @WebServlet 만나 service 메소드 수행
+	frm.submit();
+}
+
+function insertFunc(){
+	// alert("B");
+	
+	frm.action="insert.jsp";
+	frm.submit();
+}
+
+</script>
+</head>
+<body>
+<b>사용자 관리 로그인(MVC)</b>
+<form name="frm" method="post">
+아이디 : <input type="text" name="userid"><br>
+비밀번호 : <input type="text" name="password"><br>
+<input type="button" value="로 그 인" id="btnLogin">
+<input type="button" value="회 원 가 입" id="btnInsert">
+
+</form>
+</body>
+</html>
